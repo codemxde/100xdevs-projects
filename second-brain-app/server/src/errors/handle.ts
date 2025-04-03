@@ -13,6 +13,10 @@ const handleError = (err: Error, res: Response, custom?: String) => {
     logAndSendResponse(err, res);
   } else if (err instanceof errors.UserAlreadyExists) {
     logAndSendResponse(err, res);
+  } else if (err instanceof errors.UserNotFound) {
+    logAndSendResponse(err, res);
+  } else if (err instanceof errors.AuthenticationError) {
+    logAndSendResponse(err, res);
   } else {
     console.log(logger.fail(err.message));
     res.status(500).json({ error: custom });

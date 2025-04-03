@@ -34,3 +34,5 @@ export const validateUserInput = (req: Request, res: Response, next: NextFunctio
     handleError(error, res, "failed to signup user");
   }
 };
+
+export const validateContent = (req: Request, res: Response, next: NextFunction) => {};

@@ -20,4 +20,26 @@ class UserAlreadyExists extends CustomErrors {
   }
 }
 
-export default { InvalidPayloadSchema, UserAlreadyExists };
+class UserNotFound extends CustomErrors {
+  constructor(
+    message: string = "user not found in existing records",
+    statusCode: number = 404
+  ) {
+    super(message, statusCode);
+    this.name = "UserNotFound";
+  }
+}
+
+class AuthenticationError extends CustomErrors {
+  constructor(message: string = "failed to authneticate user", statusCode: number = 403) {
+    super(message, statusCode);
+    this.name = "AuthenticationError";
+  }
+}
+
+export default {
+  InvalidPayloadSchema,
+  UserAlreadyExists,
+  UserNotFound,
+  AuthenticationError,
+};
