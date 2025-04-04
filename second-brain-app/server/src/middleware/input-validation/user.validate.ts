@@ -35,4 +35,28 @@ export const validateUserInput = (req: Request, res: Response, next: NextFunctio
   }
 };
 
-export const validateContent = (req: Request, res: Response, next: NextFunction) => {};
+export const validateContent = (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const inputSchema = z.object({
+      url: z.string().url(),
+      title: z.string().min(1).max(32),
+      tags: z.array(z.string()),
+    });
+
+    const parseResult = inputSchema.safeParse(req.body);
+
+    if (!parseResult.success) {
+      throw new errors.InvalidPayloadSchema("failed to validate request body", 409);
+    }
+
+    console.log(
+      logger.middleware(
+        "Validated content fields in request body... calling next middleware"
+      )
+    );
+
+    next();
+  } catch (error: any) {
+    handleError(error, res, "failed to validate request body");
+  }
+};

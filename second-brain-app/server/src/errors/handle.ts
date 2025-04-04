@@ -4,7 +4,7 @@ import errors from "../errors/throw.js";
 import logger from "../log/logger.js";
 
 const logAndSendResponse = (err: any, res: Response) => {
-  console.log(logger.fail(err.message));
+  console.log(logger.fail(err.message) + "\n");
   res.status(err.statusCode).json({ error: err.message });
 };
 
@@ -18,7 +18,7 @@ const handleError = (err: Error, res: Response, custom?: String) => {
   } else if (err instanceof errors.AuthenticationError) {
     logAndSendResponse(err, res);
   } else {
-    console.log(logger.fail(err.message));
+    console.log(logger.fail(err.message) + "\n");
     res.status(500).json({ error: custom });
   }
 };

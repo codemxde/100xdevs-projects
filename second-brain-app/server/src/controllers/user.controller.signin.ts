@@ -10,7 +10,7 @@ export const signin = (req: Request, res: Response) => {
 
     console.log(logger.middleware("Token generation successful"));
     res.status(200).json({ token });
-    console.log(logger.success("User is now signed in!"));
+    console.log(logger.success("User is now signed in!\n"));
   } catch (error: any) {
     handleError(error, res, "failed to generate token");
   }

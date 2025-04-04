@@ -11,7 +11,8 @@ import logger from "./log/logger.js";
       console.log(
         logger.success(
           "Conection with database established...\nApplication is live on port " +
-            logger.viewPort(process.env.PORT)
+            logger.viewPort(process.env.PORT) +
+            "\n"
         )
       );
     });

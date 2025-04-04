@@ -3,6 +3,7 @@ import { Request, Response, NextFunction } from "express";
 
 import errors from "../../errors/throw.js";
 import handleError from "../../errors/handle.js";
+import logger from "../../log/logger.js";
 
 export const authenticate = (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -14,8 +15,18 @@ export const authenticate = (req: Request, res: Response, next: NextFunction) =>
 
     const decodedInfo = jwt.verify(token, process.env.JWT_SECRET as string);
 
+    if (!req.body) {
+      req.body = {};
+    }
+
     // @ts-ignore
     req.body.userId = decodedInfo.userId;
+
+    console.log(
+      logger.middleware("User authentication sucessful... calling next middleware")
+    );
+
+    next();
   } catch (error: any) {
     handleError(error, res, "failed to authenticate user");
   }

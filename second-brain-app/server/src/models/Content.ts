@@ -1,12 +1,12 @@
 import { Schema, model, Types } from "mongoose";
 
-type types = "link" | "image" | "video";
+type BrainType = "document" | "tweet" | "youtube" | "link";
 
 const ContentSchema = new Schema({
   url: { type: String, unique: true },
   title: { type: String, require: true },
-  tags: [{ type: Types.ObjectId, ref: "Tag" }],
-  userId: { type: Types.ObjectId, ref: "Users", require: true },
+  tags: [{ type: Types.ObjectId, ref: "tags" }],
+  userId: { type: Types.ObjectId, ref: "users", require: true },
 });
 
 const Content = model("content", ContentSchema);
