@@ -4,6 +4,14 @@ import errors from "../../errors/throw.js";
 import handleError from "../../errors/handle.js";
 import Users from "../../models/Users.js";
 import logger from "../../log/logger.js";
+import Links from "../../models/Links.js";
+import Content from "../../models/Content.js";
+
+interface UserType {
+  _id?: string;
+  username?: string;
+  password?: string;
+}
 
 export const checkifUserExists = async (
   req: Request,
@@ -54,5 +62,29 @@ export const findUserInDb = async (req: Request, res: Response, next: NextFuncti
     next();
   } catch (error: any) {
     handleError(error, res, "user does not exist");
+  }
+};
+
+export const validateBrain = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { shareLink } = req.params;
+
+    const brain = await Links.findOne({ hash: shareLink }).populate({
+      path: "userId",
+      select: "username",
+    });
+
+    if (!brain) {
+      throw new errors.UserNotFound("brain not found");
+    }
+
+    // @ts-ignore
+    req.brain = brain;
+
+    console.log(logger.middleware("Brain validated... calling next middleware"));
+
+    next();
+  } catch (error: any) {
+    handleError(error, res, "unable to locate brain");
   }
 };

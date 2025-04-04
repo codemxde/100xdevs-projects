@@ -60,3 +60,24 @@ export const validateContent = (req: Request, res: Response, next: NextFunction)
     handleError(error, res, "failed to validate request body");
   }
 };
+
+export const validateShare = (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const shareSchema = z.object({
+      share: z.boolean(),
+    });
+
+    const parseResult = shareSchema.safeParse(req.body);
+
+    if (!parseResult.success) {
+      throw new errors.InvalidPayloadSchema("bad request body sent for share", 409);
+    }
+
+    console.log(
+      logger.middleware("Share validation successdul... calling next middleware")
+    );
+    next();
+  } catch (error: any) {
+    handleError(error, res, "failed to validate request body");
+  }
+};
