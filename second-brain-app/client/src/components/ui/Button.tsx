@@ -32,11 +32,12 @@ const sizeStyles: Size = {
 
 const defaultStyles = "rounded-lg font-light flex gap-x-2 items-center";
 
-export default function Button({ variant, text, size, startIcon }: ButtonProps) {
+export default function Button({ variant, text, size, startIcon, endIcon }: ButtonProps) {
   return (
     <button className={`${variantStyles[variant]} ${sizeStyles[size]} ${defaultStyles} `}>
       {startIcon}
       {text}
+      {endIcon ? endIcon : ""}
     </button>
   );
 }

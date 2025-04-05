@@ -17,7 +17,7 @@ export default function Dashboard() {
         {/* Brand */}
         <div className="flex w-full items-center text-2xl gap-x-3 font-semibold">
           {/* Logo */}
-          <SecondBrain />
+          <SecondBrain size={"logo"} />
 
           {/* Brand Title */}
           <h1 className="text-brandColor">Second Brain</h1>

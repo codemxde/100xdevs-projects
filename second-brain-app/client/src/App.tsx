@@ -1,5 +1,6 @@
 import "./App.css";
 import Dashboard from "./components/Dashboard";
+import Modal from "./components/Modal";
 import Button from "./components/ui/Button";
 import Card from "./components/ui/Card";
 import Category from "./components/ui/Category";
@@ -26,7 +27,8 @@ function App() {
       />
 
       <Card /> */}
-      <Dashboard />
+      {/* <Dashboard /> */}
+      <Modal />
       {/* <Category logo={<YouTube />} category="Videos" /> */}
     </>
   );
