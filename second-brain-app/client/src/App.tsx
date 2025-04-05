@@ -1,13 +1,17 @@
 import "./App.css";
-import Button from "./components/Button";
-import Card from "./components/Card";
+import Dashboard from "./components/Dashboard";
+import Button from "./components/ui/Button";
+import Card from "./components/ui/Card";
+import Category from "./components/ui/Category";
 import Add from "./icons/Add";
 import Share from "./icons/Share";
+import X from "./icons/X";
+import YouTube from "./icons/YouTube";
 
 function App() {
   return (
     <>
-      <Button
+      {/* <Button
         variant={"primary"}
         text="Add Content"
         size={"sm"}
@@ -21,7 +25,9 @@ function App() {
         startIcon={<Share size="sm" />}
       />
 
-      <Card />
+      <Card /> */}
+      <Dashboard />
+      {/* <Category logo={<YouTube />} category="Videos" /> */}
     </>
   );
 }

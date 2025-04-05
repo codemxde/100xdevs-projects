@@ -10,6 +10,8 @@ export default {
         body: "#f9fafb",
         sidebarText: "#374151",
         cardIcon: "#9ca3af",
+        brandColor: "#1f2937",
+        mainTextColor: "#1b2331",
       },
     },
   },
