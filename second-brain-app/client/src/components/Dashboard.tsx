@@ -1,3 +1,5 @@
+import { useDispatch, useSelector } from "react-redux";
+
 import Add from "../icons/Add";
 import Document from "../icons/Document";
 import Link from "../icons/Link";
@@ -9,7 +11,13 @@ import Button from "./ui/Button";
 import Card from "./ui/Card";
 import Category from "./ui/Category";
 
+import { RootState } from "../redux/store";
+import { toggleVisibility } from "../redux/modalSlice.js";
+
 export default function Dashboard() {
+  const visible = useSelector((state: RootState) => state.modal.visible);
+  const dispatch = useDispatch();
+
   return (
     <div className="flex">
       {/* Sidebar */}
@@ -53,6 +61,7 @@ export default function Dashboard() {
               text="Add Content"
               size={"sm"}
               startIcon={<Add size={"sm"} />}
+              onClick={() => dispatch(toggleVisibility())}
             />
           </div>
         </header>

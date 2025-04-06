@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { MouseEventHandler, ReactElement } from "react";
 
 interface ButtonProps {
   variant: "primary" | "secondary";
@@ -6,6 +6,7 @@ interface ButtonProps {
   text: string;
   startIcon?: ReactElement;
   endIcon?: ReactElement;
+  onClick?: MouseEventHandler;
 }
 
 interface Variant {
@@ -32,9 +33,19 @@ const sizeStyles: Size = {
 
 const defaultStyles = "rounded-lg font-light flex gap-x-2 items-center";
 
-export default function Button({ variant, text, size, startIcon, endIcon }: ButtonProps) {
+export default function Button({
+  variant,
+  text,
+  size,
+  startIcon,
+  endIcon,
+  onClick,
+}: ButtonProps) {
   return (
-    <button className={`${variantStyles[variant]} ${sizeStyles[size]} ${defaultStyles} `}>
+    <button
+      onClick={onClick}
+      className={`${variantStyles[variant]} ${sizeStyles[size]} ${defaultStyles} `}
+    >
       {startIcon}
       {text}
       {endIcon ? endIcon : ""}

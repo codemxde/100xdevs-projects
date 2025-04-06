@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import "./App.css";
 import Dashboard from "./components/Dashboard";
 import Modal from "./components/Modal";
@@ -8,8 +9,11 @@ import Add from "./icons/Add";
 import Share from "./icons/Share";
 import X from "./icons/X";
 import YouTube from "./icons/YouTube";
+import { RootState } from "./redux/store";
 
 function App() {
+  const visible = useSelector((state: RootState) => state.modal.visible);
+
   return (
     <>
       {/* <Button
@@ -27,8 +31,10 @@ function App() {
       />
 
       <Card /> */}
-      {/* <Dashboard /> */}
-      <Modal />
+      <Dashboard />
+      {visible ? <Modal /> : ""}
+
+      {/* <Modal /> */}
       {/* <Category logo={<YouTube />} category="Videos" /> */}
     </>
   );
