@@ -1,6 +1,5 @@
 import { ChangeEvent, useRef, useState } from "react";
 import BrainType from "./ui/BrainType";
-import Close from "../icons/Close";
 import XCircle from "../icons/XCircle";
 import { useDispatch } from "react-redux";
 import { toggleVisibility } from "../redux/modalSlice";
@@ -21,6 +20,7 @@ export default function Modal() {
     // @ts-ignore
     setType(e.target.value);
   };
+
   return (
     <>
       <div className="h-screen fixed bg-slate-400 top-0 w-screen opacity-50"></div>
