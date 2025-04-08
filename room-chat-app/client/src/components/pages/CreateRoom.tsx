@@ -1,15 +1,14 @@
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import AppHeader from "../ui/app-header";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 
-export default function JoinRoom() {
+export default function CreateRoom() {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate("/create");
+    navigate("/");
   };
-
   return (
     <div>
       {/* Header */}
@@ -17,15 +16,15 @@ export default function JoinRoom() {
 
       {/* Enter Room Form */}
       <div className="flex flex-col items-center gap-y-12 mt-20">
-        <Input type={"text"} placeholder="Enter Room ID" className="w-1/5" />
         <Input type={"text"} placeholder="Enter Username" className="w-1/5" />
-        <Button className="cursor-pointer">Join</Button>
+        <Input type={"password"} placeholder="Enter Secret Password" className="w-1/5" />
+        <Button className="cursor-pointer">Create Room</Button>
       </div>
 
       {/* Create New Room */}
       <div className="absolute bottom-10 right-10">
         <Button onClick={handleClick} variant={"outline"}>
-          Create New Room
+          Join Existing Room ?
         </Button>
       </div>
     </div>
