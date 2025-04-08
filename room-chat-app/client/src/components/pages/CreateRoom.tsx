@@ -17,7 +17,7 @@ export default function CreateRoom() {
       {/* Enter Room Form */}
       <div className="flex flex-col items-center gap-y-12 mt-20">
         <Input type={"text"} placeholder="Enter Username" className="w-1/5" />
-        <Input type={"password"} placeholder="Enter Secret Password" className="w-1/5" />
+        {/* <Input type={"password"} placeholder="Enter Secret Password" className="w-1/5" /> */}
         <Button className="cursor-pointer">Create Room</Button>
       </div>
 
