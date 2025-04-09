@@ -20,7 +20,7 @@ function App() {
         <Routes>
           <Route path="/" element={<JoinRoom />} />
           <Route path="/create" element={<CreateRoom />} />
-          <Route path="/chat-room" element={<ChatRoom />} />
+          <Route path="/chatroom" element={<ChatRoom />} />
         </Routes>
       </Router>
     </ThemeProvider>
