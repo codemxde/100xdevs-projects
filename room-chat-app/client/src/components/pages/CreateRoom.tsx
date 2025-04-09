@@ -3,26 +3,29 @@ import AppHeader from "../ui/app-header";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { setSocket } from "@/redux/socketSlice";
+import { useContext, useEffect, useState } from "react";
+import { SocketContext } from "@/hooks/SocketContext";
 
 export default function CreateRoom() {
   const navigate = useNavigate();
-  const [room, setRoom] = useState(false);
-
-  const dispatch = useDispatch();
+  const ws = useContext(SocketContext);
 
   const handleClick = () => {
     navigate("/");
   };
 
-  useEffect(() => {
-    if (room) {
-      dispatch(setSocket());
-      navigate("/chatroom");
-    }
-  }, [room]);
+  // useEffect(() => {
+  //   if (room) {
+  //     setSocket()
+  //       .then((socket) => {
+  //         navigate("/chatroom");
+  //         alert("ws connection with server established");
+  //       })
+  //       .catch((err) => {
+  //         alert("failed to establish ws connection with server");
+  //       });
+  //   }
+  // }, [room]);
 
   return (
     <div>
@@ -33,14 +36,7 @@ export default function CreateRoom() {
       <div className="flex flex-col items-center gap-y-12 mt-20">
         <Input type={"text"} placeholder="Enter Username" className="w-1/5" />
 
-        <Button
-          onClick={() => {
-            setRoom(true);
-          }}
-          className="cursor-pointer"
-        >
-          Create Room
-        </Button>
+        <Button className="cursor-pointer">Create Room</Button>
       </div>
 
       {/* Create New Room */}

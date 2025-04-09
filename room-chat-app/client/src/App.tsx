@@ -12,17 +12,20 @@ import CreateRoom from "./components/pages/CreateRoom";
 
 import { Route, BrowserRouter as Router, Routes } from "react-router";
 import ChatRoom from "./components/pages/ChatRoom";
+import { SocketProvider } from "./hooks/SocketContext";
 
 function App() {
   return (
     <ThemeProvider>
-      <Router>
-        <Routes>
-          <Route path="/" element={<JoinRoom />} />
-          <Route path="/create" element={<CreateRoom />} />
-          <Route path="/chatroom" element={<ChatRoom />} />
-        </Routes>
-      </Router>
+      <SocketProvider>
+        <Router>
+          <Routes>
+            <Route path="/" element={<JoinRoom />} />
+            <Route path="/create" element={<CreateRoom />} />
+            <Route path="/chatroom" element={<ChatRoom />} />
+          </Routes>
+        </Router>
+      </SocketProvider>
     </ThemeProvider>
   );
 }
