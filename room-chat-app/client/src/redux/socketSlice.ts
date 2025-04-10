@@ -13,10 +13,14 @@ const socketSlice = createSlice({
   initialState,
   reducers: {
     setSocket(state) {
-      state.websocket = new WebSocket("ws://localhost:8080");
+      if (!state.websocket) {
+        state.websocket = new WebSocket("ws://localhost:8080");
+      }
     },
     closeSocket(state) {
-      state.websocket = null;
+      if (state.websocket) {
+        state.websocket = null;
+      }
     },
   },
 });

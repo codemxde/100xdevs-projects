@@ -5,27 +5,49 @@ import { Input } from "../ui/input";
 
 import { useContext, useEffect, useState } from "react";
 import { SocketContext } from "@/hooks/SocketContext";
+import { useSocket } from "@/hooks/Socket";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { setSocket } from "@/redux/socketSlice";
 
 export default function CreateRoom() {
   const navigate = useNavigate();
-  const ws = useContext(SocketContext);
+  const dispatch = useDispatch();
+  const ws = useSelector<RootState>((state) => state.socket.websocket);
+  const [room, setRoom] = useState<Boolean>(false);
 
   const handleClick = () => {
     navigate("/");
   };
 
-  // useEffect(() => {
-  //   if (room) {
-  //     setSocket()
-  //       .then((socket) => {
-  //         navigate("/chatroom");
-  //         alert("ws connection with server established");
-  //       })
-  //       .catch((err) => {
-  //         alert("failed to establish ws connection with server");
-  //       });
-  //   }
-  // }, [room]);
+  const handleCreateRoom = () => {
+    setRoom(true);
+  };
+
+  useEffect(() => {
+    if (room) {
+      dispatch(setSocket());
+
+      // @ts-ignore
+      ws.send(
+        JSON.stringify({
+          type: "create",
+        })
+      );
+
+      // @ts-ignore
+      ws.onmessage = (e) => {
+        const response = JSON.parse(e.data);
+
+        if (response.type === "create") {
+          const roomID = response.payload.roomID;
+          localStorage.setItem("roomID", roomID);
+        }
+      };
+
+      navigate("/chatroom");
+    }
+  }, [room]);
 
   return (
     <div>
@@ -36,7 +58,9 @@ export default function CreateRoom() {
       <div className="flex flex-col items-center gap-y-12 mt-20">
         <Input type={"text"} placeholder="Enter Username" className="w-1/5" />
 
-        <Button className="cursor-pointer">Create Room</Button>
+        <Button onClick={handleCreateRoom} className="cursor-pointer">
+          Create Room
+        </Button>
       </div>
 
       {/* Create New Room */}

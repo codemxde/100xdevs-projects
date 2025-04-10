@@ -17,15 +17,13 @@ import { SocketProvider } from "./hooks/SocketContext";
 function App() {
   return (
     <ThemeProvider>
-      <SocketProvider>
-        <Router>
-          <Routes>
-            <Route path="/" element={<JoinRoom />} />
-            <Route path="/create" element={<CreateRoom />} />
-            <Route path="/chatroom" element={<ChatRoom />} />
-          </Routes>
-        </Router>
-      </SocketProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<JoinRoom />} />
+          <Route path="/create" element={<CreateRoom />} />
+          <Route path="/chatroom" element={<ChatRoom />} />
+        </Routes>
+      </Router>
     </ThemeProvider>
   );
 }
